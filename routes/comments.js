@@ -14,7 +14,7 @@ router.post("/create",verifyToken,async (req,res)=>{
         res.status(200).json(savedComment)
     }
     catch(err){
-        res.cookie("token",token).status(500).json(err)
+        res.status(500).json(err)
     }
      
 })

@@ -13,7 +13,7 @@ router.post("/create",verifyToken,async (req,res)=>{
         //  console.log(req.body)
         const savedPost=await newPost.save()
         // console.log(savedPost);
-        res.cookie("token",token).status(200).json(savedPost)
+        res.status(200).json(savedPost)
     }
     catch(err){
         
@@ -81,7 +81,7 @@ router.get("/",async (req,res)=>{
 router.get("/user/:userId",async (req,res)=>{
     try{
         const posts=await Post.find({userId:req.params.userId})
-        res.cookie("token",token).status(200).json(posts)
+        res.status(200).json(posts)
     }
     catch(err){
         res.status(500).json(err)
