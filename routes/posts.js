@@ -27,7 +27,7 @@ router.put("/:id",verifyToken,async (req,res)=>{
     try{
        
         const updatedPost=await Post.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
-        res.cookie("token",token).status(200).json(updatedPost)
+        res.status(200).json(updatedPost)
 
     }
     catch(err){
@@ -41,7 +41,7 @@ router.delete("/:id",verifyToken,async (req,res)=>{
     try{
         await Post.findByIdAndDelete(req.params.id)
         await Comment.deleteMany({postId:req.params.id})
-        res.cookie("token",token).status(200).json("Post has been deleted!")
+        res.status(200).json("Post has been deleted!")
 
     }
     catch(err){
@@ -54,7 +54,7 @@ router.delete("/:id",verifyToken,async (req,res)=>{
 router.get("/:id",async (req,res)=>{
     try{
         const post=await Post.findById(req.params.id)
-        res.cookie("token",token).status(200).json(post)
+        res.status(200).json(post)
     }
     catch(err){
         res.status(500).json(err)
@@ -70,7 +70,7 @@ router.get("/",async (req,res)=>{
             title:{$regex:query.search, $options:"i"}
         }
         const posts=await Post.find(query.search?searchFilter:null)
-        res.cookie("token",token).status(200).json(posts)
+        res.status(200).json(posts)
     }
     catch(err){
         res.status(500).json(err)

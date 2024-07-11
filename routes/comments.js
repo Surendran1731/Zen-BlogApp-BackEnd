@@ -28,7 +28,7 @@ router.put("/:id",verifyToken,async (req,res)=>{
 
     }
     catch(err){
-        res.cookie("token",token).status(500).json(err)
+        res.status(500).json(err)
     }
 })
 
@@ -38,7 +38,7 @@ router.delete("/:id",verifyToken,async (req,res)=>{
     try{
         await Comment.findByIdAndDelete(req.params.id)
         
-        res.cookie("token",token).status(200).json("Comment has been deleted!")
+        res.status(200).json("Comment has been deleted!")
 
     }
     catch(err){
@@ -56,7 +56,7 @@ router.get("/post/:postId",async (req,res)=>{
         res.status(200).json(comments)
     }
     catch(err){
-        res.cookie("token",token).status(500).json(err)
+        res.status(500).json(err)
     }
 })
 
